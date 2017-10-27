@@ -16,7 +16,7 @@ app.get('*', function(req, res) {
     });
 });
 
-const PORT = parseInt(process.env.PORT || '3001');
+const PORT = parseInt(process.env.PORT || '3333');
 const IP = process.env.IP || '0.0.0.0';
 
 app.listen(PORT, IP, function() {

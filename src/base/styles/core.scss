@@ -1,0 +1,17 @@
+html, body, #root {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+$spacer: 1rem;
+$blue: #3F51B5;
+$red: #F44336;
+
+.base-layout {
+  min-height: 100%;
+  background: $blue;
+}
+
+.panel {
+  padding: 2 * $spacer;
+}

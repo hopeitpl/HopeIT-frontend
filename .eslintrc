@@ -34,7 +34,7 @@
     "react/jsx-key": 0,
     "react/no-unescaped-entities": 0,
     "react/no-children-prop": 1,
-    "no-console": 1,
+    "no-console": 0,
     "no-debugger": 1,
     "no-unused-vars": 1,
     "array-bracket-spacing": 2,

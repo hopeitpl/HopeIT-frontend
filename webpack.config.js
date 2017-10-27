@@ -68,11 +68,12 @@ var config = {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
       },
       '__PRODUCTION__': JSON.stringify(process.env.NODE_ENV === 'production'),
-      '__API_URL__': JSON.stringify(process.env.FRONTEND_API_URL || '')
+      '__API_URL__': JSON.stringify(process.env.API_URL || 'http://hopeit.karkut.info:8000')
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       hash: false,
+      favicon: 'src/base/assets/favicon.ico',
       filename: 'index.html',
       inject: 'body',
       minify: {
@@ -87,7 +88,7 @@ var config = {
 switch (process.env.NODE_ENV) {
   case 'development':
     const HOST = '0.0.0.0';
-    const PORT = 3001;
+    const PORT = 3333;
 
     config.entry.app.unshift(
       'babel-polyfill',
