@@ -3,7 +3,7 @@ import { login, LOGOUT } from './actions';
 const initialState = {
   token: null,
   error: null,
-  isLoading: false
+  isLoading: true
 };
 
 const loginReducer = (state = initialState, action) => {

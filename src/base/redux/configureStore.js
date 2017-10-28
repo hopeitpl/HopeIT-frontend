@@ -4,26 +4,42 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import formActionSaga from 'redux-form-saga';
 import { reducer as formReducer } from 'redux-form';
-import { all } from 'redux-saga/effects';
+import Api from 'api';
+import { all, call, put } from 'redux-saga/effects';
+import { login } from 'auth/redux/actions';
 
 // Sagas
-import { loginSaga } from 'auth/redux/sagas';
+import { loginSaga, logoutSaga } from 'auth/redux/sagas';
 
 // Reducers
-import login from 'auth/redux/reducers';
+import loginReducer from 'auth/redux/reducers';
+import { usersReducer, usersSaga } from 'dashboard/redux';
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = !__PRODUCTION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+function* initialSaga() {
+  const token = yield call(Api.getCookie, 'token');
+  if (token) {
+    yield put(login.request({ token }));
+  } else {
+    yield put(login.failure());
+  }
+}
 
 const rootSaga = function* () {
   yield all([
     formActionSaga(),
     loginSaga(),
+    logoutSaga(),
+    usersSaga(),
+    initialSaga()
   ]);
 };
 
 const rootReducer = combineReducers({
-  login,
+  users: usersReducer,
+  login: loginReducer,
   form: formReducer,
   router: routerReducer
 });

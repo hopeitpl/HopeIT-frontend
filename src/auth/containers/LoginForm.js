@@ -5,16 +5,16 @@ import { Typography, FormControl, Button, Paper } from 'material-ui';
 import TextField from 'forms/TextField';
 import { login } from '../redux/actions';
 
-export const LoginForm = ({ handleSubmit }) => {
+export const LoginForm = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit(login)}>
       <Paper className="panel">
         <Typography type="display1">Login</Typography>
         <FormControl fullWidth margin="normal">
-          <Field name="email" component={TextField} label="Email" />
+          <Field name="email" component={TextField} label="Email" error={!!error} />
         </FormControl>
         <FormControl fullWidth margin="normal">
-          <Field name="password" component={TextField} type="password" label="Password" />
+          <Field name="password" component={TextField} type="password" error={!!error} label="Password" />
         </FormControl>
         <FormControl fullWidth margin="normal">
           <Button raised type="submit" color="primary">Login</Button>
@@ -25,7 +25,8 @@ export const LoginForm = ({ handleSubmit }) => {
 };
 
 LoginForm.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  error: PropTypes.string
 };
 
 const ReduxLoginForm = reduxForm({
