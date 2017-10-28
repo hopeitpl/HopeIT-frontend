@@ -20,8 +20,8 @@ export class PaymentsList extends React.Component {
           numeric: true
         }
       },
-      user_id: {
-        label: 'Id użytkownika'
+      user: {
+        label: 'Użytkownik'
       },
       operation_amount: {
         label: 'Kwota'
