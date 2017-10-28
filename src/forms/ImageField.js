@@ -6,7 +6,7 @@ const onImageUpload = (onChange, picture) => {
   const reader = new FileReader();
 
   reader.addEventListener('load', () => {
-    onChange(reader.result);
+    onChange(reader.result.split(',')[1]);
   });
 
   reader.readAsDataURL(picture[0]);

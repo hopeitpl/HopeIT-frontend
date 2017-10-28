@@ -35,7 +35,7 @@ export class UserView extends React.Component {
                 <AccountCircleIcon style={{width: '150px', height: '150px', fill: grey[500] }}/>
               </Grid>
               <Grid item>
-                <Typography type="display2" gutterBottom>Imie Nazwisko</Typography>
+                <Typography type="display2" gutterBottom>{data.first_name} {data.last_name}</Typography>
               </Grid>
             </Grid>
             <Grid container alignItems="center" justify="flex-end">

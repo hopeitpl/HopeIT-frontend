@@ -6,15 +6,15 @@ import { CheckCircle } from 'material-ui-icons';
 import { indigo } from 'material-ui/colors';
 import ImageField from 'forms/ImageField';
 import TextField from 'forms/TextField';
-import { sendMessage } from '../redux';
+import { sendMultiMessage } from '../redux';
 
-export class SendMessageForm extends React.Component {
+export class SendMultiMessageForm extends React.Component {
   render() {
-    const { handleSubmit, user, submitSucceeded, submitting } = this.props;
+    const { handleSubmit, submitSucceeded, submitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(sendMessage({urlParams: {id: user.id}}))}>
-        <Typography type="display3" align="center" gutterBottom>Wyślij wiadomość do {user.username}</Typography>
+      <form onSubmit={handleSubmit(sendMultiMessage())}>
+        <Typography type="display3" align="center" gutterBottom>Wyślij wiadomość do wielu użytkowników</Typography>
         {submitSucceeded ?
           <Grid container direction="column" alignItems="center" justify="center">
             <Grid item>
@@ -22,12 +22,15 @@ export class SendMessageForm extends React.Component {
             </Grid>
             <Grid item>
               <Typography type="headline" align="center" color="primary">
-                Wysłano wiadomość do użytkownika {user.username}
+                Wiadomość została pomyślnie wysłana do użytkowników
               </Typography>
             </Grid>
           </Grid>
           :
           <div style={{maxWidth: '400px', margin: '0 auto'}}>
+            <FormControl fullWidth margin="normal">
+              <Field name="users" component={TextField} label="Użytkownicy" />
+            </FormControl>
             <FormControl fullWidth margin="normal">
               <Field name="body" component={TextField} multiline label="Treść wiadomości" />
             </FormControl>
@@ -44,16 +47,15 @@ export class SendMessageForm extends React.Component {
   }
 }
 
-SendMessageForm.propTypes = {
+SendMultiMessageForm.propTypes = {
   handleSubmit: PropTypes.func,
   error: PropTypes.string,
   submitSucceeded: PropTypes.bool,
-  submitting: PropTypes.bool,
-  user: PropTypes.object
+  submitting: PropTypes.bool
 };
 
-const ReduxSendMessageForm = reduxForm({
-  form: 'sendMessage'
-})(SendMessageForm);
+const ReduxSendMultiMessageForm = reduxForm({
+  form: 'sendMultiMessage'
+})(SendMultiMessageForm);
 
-export default ReduxSendMessageForm;
+export default ReduxSendMultiMessageForm;

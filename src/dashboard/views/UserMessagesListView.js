@@ -59,7 +59,7 @@ export class UserMessagesListView extends React.Component {
                           return (
                             <TableCell key={j} {...(labels[key].options || {})}>
                               {key === 'picture' ?
-                                <img src={user[key]} /> :
+                                <img src={`data:image;base64,${user[key]}`} /> :
                                 user[key]
                               }
                             </TableCell>

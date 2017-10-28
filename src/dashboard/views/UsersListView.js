@@ -29,6 +29,12 @@ export class UsersList extends React.Component {
       },
       username: {
         label: 'Nazwa użytkownika'
+      },
+      first_name: {
+        label: 'Imię'
+      },
+      last_name: {
+        label: 'Nazwisko'
       }
     };
 

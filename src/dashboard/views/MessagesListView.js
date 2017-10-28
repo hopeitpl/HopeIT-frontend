@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchMessages } from '../redux';
-import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper } from 'material-ui';
+import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper, Grid, Button } from 'material-ui';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 
 export class MessagesListView extends React.Component {
@@ -32,7 +33,19 @@ export class MessagesListView extends React.Component {
       <AuthenticatedLayout title="Wiadomości">
         {data ?
           <div>
-            <Typography type="display3" gutterBottom>Wiadomości</Typography>
+            <Grid container justify="space-between" alignItems="center">
+              <Grid item>
+                <Typography type="display3" gutterBottom>Wiadomości</Typography>
+              </Grid>
+              <Grid item>
+                <Button raised
+                        color="primary"
+                        component={Link}
+                        to="/dashboard/messages/send">
+                    Wyślij do wielu
+                </Button>
+              </Grid>
+            </Grid>
             <Paper>
               <Table>
                 <TableHead>
@@ -52,7 +65,7 @@ export class MessagesListView extends React.Component {
                           return (
                             <TableCell key={j} {...(labels[key].options || {})}>
                               {key === 'picture' ?
-                                <img src={user[key]} /> :
+                                <img src={`data:image;base64,${user[key]}`} /> :
                                 user[key]
                               }
                             </TableCell>

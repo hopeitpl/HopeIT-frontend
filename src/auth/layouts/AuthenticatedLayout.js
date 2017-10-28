@@ -22,7 +22,7 @@ const styles = (theme) => ({
   main: {
     paddingTop: '80px',
     maxWidth: '1000px',
-    margin: '0 auto'
+    margin: '0 auto 80px'
   },
   drawerHeader: {
     ...theme.mixins.toolbar,

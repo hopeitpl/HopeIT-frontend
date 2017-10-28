@@ -30,3 +30,10 @@ export const sendMessage = createAction('SEND_MESSAGE', {
 });
 export const sendMessageReducer = createReducer(sendMessage);
 export const sendMessageSaga = createSaga(sendMessage);
+
+export const sendMultiMessage = createAction('SEND_MULTI_MESSAGE', {
+  method: 'POST',
+  url: '/admin/messages'
+});
+export const sendMultiMessageReducer = createReducer(sendMultiMessage);
+export const sendMultiMessageSaga = createSaga(sendMultiMessage);
