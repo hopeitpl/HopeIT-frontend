@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Typography, FormControl, Button, Snackbar } from 'material-ui';
+import ImageField from 'forms/ImageField';
 import TextField from 'forms/TextField';
 import { sendMessage } from '../redux';
 
@@ -45,7 +46,7 @@ export class SendMessageForm extends React.Component {
             <Field name="body" component={TextField} multiline label="Treść wiadomości" />
           </FormControl>
           <FormControl fullWidth margin="normal">
-            <Field name="picture" component={TextField} label="Obraz" />
+            <Field name="picture" component={ImageField} label="Obraz" />
           </FormControl>
           <FormControl fullWidth margin="normal">
             <Button raised type="submit" color="primary">Wyślij</Button>

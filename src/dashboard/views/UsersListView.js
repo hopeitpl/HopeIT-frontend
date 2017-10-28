@@ -32,39 +32,43 @@ export class UsersList extends React.Component {
       }
     };
 
-    return data ? (
+    return (
       <AuthenticatedLayout title="Użytkownicy">
-        <Typography type="display3" gutterBottom>Użytkownicy</Typography>
-        <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                {Object.values(labels).map((l, i) => {
-                  return (
-                    <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
-                  );
-                })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.users.map((user, i) => {
-                return (
-                  <TableRow key={i} hover onClick={this.handleUserClick(user.id)}>
-                    {Object.keys(labels).map((key, j) => {
+        {data ?
+          <div>
+            <Typography type="display3" gutterBottom>Użytkownicy</Typography>
+            <Paper>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    {Object.values(labels).map((l, i) => {
                       return (
-                        <TableCell key={j} {...(labels[key].options || {})}>
-                          {user[key]}
-                        </TableCell>
+                        <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
                       );
                     })}
                   </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Paper>
+                </TableHead>
+                <TableBody>
+                  {data.users.map((user, i) => {
+                    return (
+                      <TableRow key={i} hover onClick={this.handleUserClick(user.id)}>
+                        {Object.keys(labels).map((key, j) => {
+                          return (
+                            <TableCell key={j} {...(labels[key].options || {})}>
+                              {user[key]}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </Paper>
+          </div> : null
+        }
       </AuthenticatedLayout>
-    ) : null;
+    );
   }
 }
 

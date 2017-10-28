@@ -23,13 +23,15 @@ export class SendMessageView extends React.Component {
   render () {
     const { data } = this.props;
 
-    return data ? (
+    return (
       <AuthenticatedLayout title="Wyślij wiadomość">
-        <Paper className="panel">
-          <SendMessageForm user={data} />
-        </Paper>
+        {data ?
+          <Paper className="panel">
+            <SendMessageForm user={data} />
+          </Paper> : null
+        }
       </AuthenticatedLayout>
-    ) : null;
+    );
   }
 }
 

@@ -25,47 +25,49 @@ export class UserView extends React.Component {
   render () {
     const { data } = this.props;
 
-    return data ? (
+    return (
       <AuthenticatedLayout title="Użytkownik">
-        <Paper className="panel">
-          <Typography type="display3" gutterBottom style={{paddingLeft: '16px'}}>{data.username}</Typography>
-          <Grid container alignItems="center">
-            <Grid item>
-              <AccountCircleIcon style={{width: '150px', height: '150px', fill: grey[500] }}/>
+        {data ?
+          <Paper className="panel">
+            <Typography type="display3" gutterBottom style={{paddingLeft: '16px'}}>{data.username}</Typography>
+            <Grid container alignItems="center">
+              <Grid item>
+                <AccountCircleIcon style={{width: '150px', height: '150px', fill: grey[500] }}/>
+              </Grid>
+              <Grid item>
+                <Typography type="display2" gutterBottom>Imie Nazwisko</Typography>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography type="display2" gutterBottom>Imie Nazwisko</Typography>
+            <Grid container alignItems="center" justify="flex-end">
+              <Grid item>
+                <Button component={Link}
+                        to={`/dashboard/users/${data.id}/send`}
+                        raised
+                        color="primary">
+                  Wyślij wiadomość
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button component={Link}
+                        to={`/dashboard/users/${data.id}/messages`}
+                        raised
+                        color="primary">
+                  Wysłane wiadomości
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button component={Link}
+                        to={`/dashboard/users/${data.id}/payments`}
+                        raised
+                        color="primary">
+                  Lista wpłat
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container alignItems="center" justify="flex-end">
-            <Grid item>
-              <Button component={Link}
-                      to={`/dashboard/users/${data.id}/send`}
-                      raised
-                      color="primary">
-                Wyślij wiadomość
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button component={Link}
-                      to={`/dashboard/users/${data.id}/messages`}
-                      raised
-                      color="primary">
-                Wysłane wiadomości
-              </Button>
-            </Grid>
-            <Grid item>
-              <Button component={Link}
-                      to={`/dashboard/users/${data.id}/payments`}
-                      raised
-                      color="primary">
-                Lista wpłat
-              </Button>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper> : null
+        }
       </AuthenticatedLayout>
-    ) : null;
+    );
   }
 }
 
