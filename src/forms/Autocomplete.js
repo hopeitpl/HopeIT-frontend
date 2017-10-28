@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers } from 'dashboard/redux';
 import Select from 'react-select';
+import { withStyles } from 'material-ui';
 
 import 'react-select/dist/react-select.css';
 
+
+const styles = (theme) => {
+  console.log(theme);
+};
 
 class Autocomplete extends React.Component {
   componentDidMount() {
@@ -13,7 +18,7 @@ class Autocomplete extends React.Component {
   }
 
   render() {
-    const { input, data } = this.props;
+    const { input, data, disabled } = this.props;
 
     const options = data && data.users && data.users.map((user) => {
       const name = `(${user.first_name || ''} ${user.last_name || ''})`;
@@ -29,6 +34,7 @@ class Autocomplete extends React.Component {
         value={input.value}
         multi={true}
         options={options}
+        disabled={disabled}
         onChange={(values) => {
           input.onChange(values.map((v) => v.value));
         }}
@@ -39,10 +45,11 @@ class Autocomplete extends React.Component {
 
 Autocomplete.propTypes = {
   dispatch: PropTypes.func,
+  disabled: PropTypes.bool,
   input: PropTypes.object,
   data: PropTypes.object
 };
 
 const select = ({ users }) => (users);
 
-export default connect(select)(Autocomplete);
+export default connect(select)(withStyles(styles)(Autocomplete));

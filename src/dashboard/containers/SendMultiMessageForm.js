@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { Typography, FormControl, Button, Grid } from 'material-ui';
 import { CheckCircle } from 'material-ui-icons';
 import { indigo } from 'material-ui/colors';
 import ImageField from 'forms/ImageField';
 import TextField from 'forms/TextField';
+import Checkbox from 'forms/Checkbox';
 import Autocomplete from 'forms/Autocomplete';
 import { sendMultiMessage } from '../redux';
 
 export class SendMultiMessageForm extends React.Component {
   render() {
-    const { handleSubmit, submitSucceeded, submitting, reset } = this.props;
+    const { handleSubmit, submitSucceeded, submitting, reset, allUsers } = this.props;
 
     return (
       <form onSubmit={handleSubmit(sendMultiMessage())}>
@@ -33,9 +35,19 @@ export class SendMultiMessageForm extends React.Component {
             </Grid>
           </Grid>
           :
-          <div style={{maxWidth: '400px', margin: '0 auto'}}>
+          <div style={{maxWidth: '500px', margin: '0 auto'}}>
             <FormControl fullWidth margin="normal">
-              <Field name="user_ids" component={Autocomplete} label="Użytkownicy" />
+              <Grid container alignItems="center">
+                <Grid item xs={12} sm={11}>
+                  {!allUsers ?
+                    <Field name="user_ids" disabled={allUsers} component={Autocomplete} label="Użytkownicy" /> :
+                    <Typography type="subheading" color="primary">Wybrano wszystkich użytkowników</Typography>
+                  }
+                </Grid>
+                <Grid item xs={12} sm={1}>
+                  <Field name="all_users" component={Checkbox} />
+                </Grid>
+              </Grid>
             </FormControl>
             <FormControl fullWidth margin="normal">
               <Field name="body" component={TextField} multiline label="Treść wiadomości" />
@@ -58,11 +70,19 @@ SendMultiMessageForm.propTypes = {
   error: PropTypes.string,
   submitSucceeded: PropTypes.bool,
   submitting: PropTypes.bool,
-  reset: PropTypes.func
+  reset: PropTypes.func,
+  allUsers: PropTypes.bool
 };
 
 const ReduxSendMultiMessageForm = reduxForm({
   form: 'sendMultiMessage'
 })(SendMultiMessageForm);
 
-export default ReduxSendMultiMessageForm;
+const select = (state) => {
+  const selector = formValueSelector('sendMultiMessage');
+  return {
+    allUsers: selector(state, 'all_users')
+  };
+}
+
+export default connect(select)(ReduxSendMultiMessageForm);
