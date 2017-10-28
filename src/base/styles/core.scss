@@ -45,3 +45,12 @@ $red: #F44336;
     color: inherit;
   }
 }
+
+.fileContainer .chooseFileButton.chooseFileButton {
+  background: $blue;
+  border-radius: 2px;
+
+  &:hover {
+    background: #303f9f;
+  }
+}

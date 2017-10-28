@@ -10,7 +10,7 @@ import { sendMessage } from '../redux';
 
 export class SendMessageForm extends React.Component {
   render() {
-    const { handleSubmit, user, submitSucceeded, submitting } = this.props;
+    const { handleSubmit, user, submitSucceeded, submitting, reset } = this.props;
 
     return (
       <form onSubmit={handleSubmit(sendMessage({urlParams: {id: user.id}}))}>
@@ -24,6 +24,11 @@ export class SendMessageForm extends React.Component {
               <Typography type="headline" align="center" color="primary">
                 Wysłano wiadomość do użytkownika {user.username}
               </Typography>
+            </Grid>
+            <Grid item>
+              <Button raised color="primary" onClick={() => reset()}>
+                Wyślij kolejną wiadomość!
+              </Button>
             </Grid>
           </Grid>
           :
@@ -49,7 +54,8 @@ SendMessageForm.propTypes = {
   error: PropTypes.string,
   submitSucceeded: PropTypes.bool,
   submitting: PropTypes.bool,
-  user: PropTypes.object
+  user: PropTypes.object,
+  reset: PropTypes.func
 };
 
 const ReduxSendMessageForm = reduxForm({

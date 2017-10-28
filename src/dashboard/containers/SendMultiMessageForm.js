@@ -6,11 +6,12 @@ import { CheckCircle } from 'material-ui-icons';
 import { indigo } from 'material-ui/colors';
 import ImageField from 'forms/ImageField';
 import TextField from 'forms/TextField';
+import Autocomplete from 'forms/Autocomplete';
 import { sendMultiMessage } from '../redux';
 
 export class SendMultiMessageForm extends React.Component {
   render() {
-    const { handleSubmit, submitSucceeded, submitting } = this.props;
+    const { handleSubmit, submitSucceeded, submitting, reset } = this.props;
 
     return (
       <form onSubmit={handleSubmit(sendMultiMessage())}>
@@ -25,11 +26,16 @@ export class SendMultiMessageForm extends React.Component {
                 Wiadomość została pomyślnie wysłana do użytkowników
               </Typography>
             </Grid>
+            <Grid item>
+              <Button raised color="primary" onClick={() => reset()}>
+                Wyślij kolejną wiadomość!
+              </Button>
+            </Grid>
           </Grid>
           :
           <div style={{maxWidth: '400px', margin: '0 auto'}}>
             <FormControl fullWidth margin="normal">
-              <Field name="users" component={TextField} label="Użytkownicy" />
+              <Field name="user_ids" component={Autocomplete} label="Użytkownicy" />
             </FormControl>
             <FormControl fullWidth margin="normal">
               <Field name="body" component={TextField} multiline label="Treść wiadomości" />
@@ -51,7 +57,8 @@ SendMultiMessageForm.propTypes = {
   handleSubmit: PropTypes.func,
   error: PropTypes.string,
   submitSucceeded: PropTypes.bool,
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool,
+  reset: PropTypes.func
 };
 
 const ReduxSendMultiMessageForm = reduxForm({

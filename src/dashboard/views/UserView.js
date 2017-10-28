@@ -52,7 +52,7 @@ export class UserView extends React.Component {
                         to={`/dashboard/users/${data.id}/messages`}
                         raised
                         color="primary">
-                  Wysłane wiadomości
+                  Archiwum wiadomości
                 </Button>
               </Grid>
               <Grid item>
