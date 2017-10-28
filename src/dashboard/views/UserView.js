@@ -36,7 +36,7 @@ export class UserView extends React.Component {
             <Grid container alignItems="center">
               <Grid item sm={8}>
                 <Grid container alignItems="center" style={{marginTop: '20px'}}>
-                  <Grid container sm={12} gutterBottom className="user-field">
+                  <Grid container className="user-field">
                     <Grid item sm={6}>
                       <Typography type="headline" gutterBottom>Nazwa użytkownika</Typography>
                     </Grid>
@@ -44,7 +44,7 @@ export class UserView extends React.Component {
                       <Typography color="primary" type="headline" gutterBottom>{data.username}</Typography>
                     </Grid>
                   </Grid>
-                  <Grid container sm={12} gutterBottom className="user-field">
+                  <Grid container className="user-field">
                     <Grid item sm={6}>
                       <Typography type="headline" gutterBottom>Ukończone cele</Typography>
                     </Grid>
@@ -52,7 +52,7 @@ export class UserView extends React.Component {
                       <Typography color="primary" type="headline" gutterBottom>{data.finished_goals}</Typography>
                     </Grid>
                   </Grid>
-                  <Grid container sm={12} gutterBottom className="user-field">
+                  <Grid container className="user-field">
                     <Grid item sm={6}>
                       <Typography type="headline" gutterBottom>Suma wpłat</Typography>
                     </Grid>
@@ -60,7 +60,7 @@ export class UserView extends React.Component {
                       <Typography color="primary" type="headline" gutterBottom>{data.total_amount}</Typography>
                     </Grid>
                   </Grid>
-                  <Grid container sm={12} gutterBottom className="user-field">
+                  <Grid container className="user-field">
                     <Grid item sm={6}>
                       <Typography type="headline" gutterBottom>Liczba przelewów</Typography>
                     </Grid>

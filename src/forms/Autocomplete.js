@@ -3,14 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchUsers } from 'dashboard/redux';
 import Select from 'react-select';
-import { withStyles } from 'material-ui';
 
 import 'react-select/dist/react-select.css';
 
-
-const styles = (theme) => {
-  console.log(theme);
-};
 
 class Autocomplete extends React.Component {
   componentDidMount() {
@@ -52,4 +47,4 @@ Autocomplete.propTypes = {
 
 const select = ({ users }) => (users);
 
-export default connect(select)(withStyles(styles)(Autocomplete));
+export default connect(select)(Autocomplete);

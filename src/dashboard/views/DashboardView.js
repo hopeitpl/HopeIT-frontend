@@ -18,7 +18,7 @@ class DashboardView extends React.Component {
   render() {
     return <AuthenticatedLayout title="Pulpit">
       <Grid container>
-        <Grid item xs={12} md={10}>
+        <Grid item xs={12} md={8}>
           <div style={{textAligg: 'right'}}>
             <Card>
               <CardContent>
@@ -62,25 +62,26 @@ class DashboardView extends React.Component {
             </Card>
           </div>
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={4}>
           <Grid container direction="column"
                 className="dashboard-buttons"
                 alignItems="center"
                 justify="center" style={{margin: '0'}}>
             <Grid item>
-              <Button to={'/dashboard/users'} component={Link} raised color="primary" style={{width: '150px'}}>
+              <Button to={'/dashboard/users'} component={Link}
+                      raised color="primary" style={{width: '270px'}}>
                 Użytkownicy
               </Button>
             </Grid>
             <Grid item>
               <Button to={'/dashboard/payments'} component={Link}
-                      raised style={{width: '150px', background: pink[500], color: 'white'}}>
+                      raised style={{width: '270px', background: pink[500], color: 'white'}}>
                 Lista wpłat
               </Button>
             </Grid>
             <Grid item>
               <Button to={'/dashboard/messages'} component={Link}
-                      raised style={{width: '150px', background: indigo[200], color: 'white'}}>
+                      raised style={{width: '270px', background: indigo[200], color: 'white'}}>
                 Wiadomości
               </Button>
             </Grid>
