@@ -1,8 +1,9 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import LoginView from 'auth/views/LoginView';
 import DashboardView from 'dashboard/views/DashboardView';
-import Error404 from 'base/views/Error404';
+import RouteNotFound from 'httpErrors/components/RouteNotFound';
+import HandleError from 'httpErrors/containers/HandleError';
 import { MuiThemeProvider, createMuiTheme, red, indigo } from 'material-ui/styles';
 
 const theme = createMuiTheme({
@@ -15,11 +16,14 @@ const theme = createMuiTheme({
 export const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
-      <Switch>
-        <Route exact path="/login" component={LoginView} />
-        <Route exact path="/" component={DashboardView} />
-        <Route component={Error404} />
-      </Switch>
+      <HandleError>
+        <Switch>
+          <Route exact path="/login" component={LoginView} />
+          <Route path="/dashboard" component={DashboardView} />
+          <Redirect exact from="/" to="/dashboard" />
+          <RouteNotFound />
+        </Switch>
+      </HandleError>
     </MuiThemeProvider>
   );
 };

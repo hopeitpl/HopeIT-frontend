@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { fetchUsers } from '../redux';
-import { Table, TableHead, TableBody, TableRow, TableCell } from 'material-ui';
+import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper } from 'material-ui';
 
 export class UsersList extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchUsers.request());
+  }
+
+  handleUserClick = (id) => {
+    return () => {
+      this.props.dispatch(push(`/dashboard/users/${id}`));
+    };
   }
 
   render () {
@@ -20,41 +27,41 @@ export class UsersList extends React.Component {
         }
       },
       username: {
-        label: 'Username'
-      },
-      device: {
-        label: 'Device'
+        label: 'Nazwa użytkownika'
       }
     };
 
     return data ? (
       <div>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {Object.values(labels).map((l, i) => {
+        <Typography type="display3">Użytkownicy</Typography>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {Object.values(labels).map((l, i) => {
+                  return (
+                    <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.users.map((user, i) => {
                 return (
-                  <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                  <TableRow key={i} hover onClick={this.handleUserClick()}>
+                    {Object.keys(labels).map((key, j) => {
+                      return (
+                        <TableCell key={j} {...(labels[key].options || {})}>
+                          {user[key]}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
                 );
               })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.users.map((user, i) => {
-              return (
-                <TableRow key={i}>
-                  {Object.keys(labels).map((key, j) => {
-                    return (
-                      <TableCell key={j} {...(labels[key].options || {})}>
-                        {user[key]}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
+        </Paper>
       </div>
     ) : null;
   }

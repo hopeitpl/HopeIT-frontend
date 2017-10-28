@@ -14,10 +14,10 @@ export const LoginForm = ({ handleSubmit, error }) => {
           <Field name="email" component={TextField} label="Email" error={!!error} />
         </FormControl>
         <FormControl fullWidth margin="normal">
-          <Field name="password" component={TextField} type="password" error={!!error} label="Password" />
+          <Field name="password" component={TextField} type="password" error={!!error} label="Hasło" />
         </FormControl>
         <FormControl fullWidth margin="normal">
-          <Button raised type="submit" color="primary">Login</Button>
+          <Button raised type="submit" color="primary">Zaloguj</Button>
         </FormControl>
       </Paper>
     </form>

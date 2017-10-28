@@ -13,7 +13,7 @@ export function* logoutSaga() {
 }
 
 function* handleLoginSaga(action) {
-  const { email, password } = action.payload;
+  const { email, password, redirect = true } = action.payload;
   let token;
 
   try {
@@ -25,7 +25,9 @@ function* handleLoginSaga(action) {
     }
     yield call(Api.get, '/_ping');
     yield put(login.success({ token }));
-    yield put(push('/'));
+    if (redirect) {
+      yield put(push('/dashboard'));
+    }
   } catch(error) {
     console.log(error);
     const formError = new SubmissionError({

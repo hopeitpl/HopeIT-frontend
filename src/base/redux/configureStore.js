@@ -13,7 +13,8 @@ import { loginSaga, logoutSaga } from 'auth/redux/sagas';
 
 // Reducers
 import loginReducer from 'auth/redux/reducers';
-import { usersReducer, usersSaga } from 'dashboard/redux';
+import { usersReducer, usersSaga, userReducer, userSaga } from 'dashboard/redux';
+import { httpErrorsReducer } from 'httpErrors/redux';
 
 const sagaMiddleware = createSagaMiddleware();
 const composeEnhancers = !__PRODUCTION__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,7 +22,7 @@ const composeEnhancers = !__PRODUCTION__ && window.__REDUX_DEVTOOLS_EXTENSION_CO
 function* initialSaga() {
   const token = yield call(Api.getCookie, 'token');
   if (token) {
-    yield put(login.request({ token }));
+    yield put(login.request({ token, redirect: false }));
   } else {
     yield put(login.failure());
   }
@@ -33,14 +34,17 @@ const rootSaga = function* () {
     loginSaga(),
     logoutSaga(),
     usersSaga(),
+    userSaga(),
     initialSaga()
   ]);
 };
 
 const rootReducer = combineReducers({
   users: usersReducer,
+  user: userReducer,
   login: loginReducer,
   form: formReducer,
+  httpErrors: httpErrorsReducer,
   router: routerReducer
 });
 
