@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme, red, indigo } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme, pink, indigo } from 'material-ui/styles';
 import LoginView from 'auth/views/LoginView';
 import DashboardView from 'dashboard/views/DashboardView';
 import UsersList from 'dashboard/views/UsersListView';
@@ -17,7 +17,7 @@ import UserMessagesListView from 'dashboard/views/UserMessagesListView';
 const theme = createMuiTheme({
   palette: {
     primary: indigo,
-    secondary: red
+    secondary: pink
   }
 });
 

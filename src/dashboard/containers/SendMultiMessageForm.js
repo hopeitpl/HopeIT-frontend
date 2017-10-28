@@ -83,6 +83,6 @@ const select = (state) => {
   return {
     allUsers: selector(state, 'all_users')
   };
-}
+};
 
 export default connect(select)(ReduxSendMultiMessageForm);

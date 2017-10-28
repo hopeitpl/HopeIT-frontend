@@ -41,10 +41,10 @@ export class PaymentsList extends React.Component {
     };
 
     return (
-      <AuthenticatedLayout title="Lista płatności">
+      <AuthenticatedLayout title="Lista wpłat">
         {data ?
           <div>
-            <Typography type="display3" gutterBottom>Lista płatności</Typography>
+            <Typography type="display3" gutterBottom>Lista wpłat</Typography>
             <Paper>
               <Table>
                 <TableHead>

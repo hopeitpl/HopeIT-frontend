@@ -18,13 +18,12 @@ $red: #F44336;
   padding: 30px;
 }
 
-.navbar {
+.navbar,
+.dashboard-buttons {
   a {
     display: flex;
     text-decoration: none;
     flex: 1;
-    padding: 12px 16px;
-    margin: -12px -16px;
 
     &:focus,
     &:active {
@@ -32,6 +31,17 @@ $red: #F44336;
       color: inherit;
     }
   }
+}
+
+.navbar {
+  a {
+    padding: 12px 16px;
+    margin: -12px -16px;
+  }
+}
+
+.user-panel {
+  padding: 40px 130px;
 }
 
 .full-link {
@@ -137,4 +147,8 @@ img {
     line-height: 38px;
     font-weight: 400;
   }
+}
+
+.user-field.user-field {
+  margin-bottom: 10px;
 }

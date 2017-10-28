@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { fetchUser } from '../redux';
 import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 import { Typography, Paper, Grid, Button } from 'material-ui';
-import { grey } from 'material-ui/colors';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 
 
@@ -28,17 +27,58 @@ export class UserView extends React.Component {
     return (
       <AuthenticatedLayout title="Użytkownik">
         {data ?
-          <Paper className="panel">
-            <Typography type="display3" gutterBottom style={{paddingLeft: '16px'}}>{data.username}</Typography>
-            <Grid container alignItems="center">
+          <Paper className="panel user-panel">
+            <Grid container justify="center" alignItems="center">
               <Grid item>
-                <AccountCircleIcon style={{width: '150px', height: '150px', fill: grey[500] }}/>
-              </Grid>
-              <Grid item>
-                <Typography type="display2" gutterBottom>{data.first_name} {data.last_name}</Typography>
+                <Typography type="display3" gutterBottom>{data.first_name} {data.last_name}</Typography>
               </Grid>
             </Grid>
-            <Grid container alignItems="center" justify="flex-end">
+            <Grid container alignItems="center">
+              <Grid item sm={8}>
+                <Grid container alignItems="center" style={{marginTop: '20px'}}>
+                  <Grid container sm={12} gutterBottom className="user-field">
+                    <Grid item sm={6}>
+                      <Typography type="headline" gutterBottom>Nazwa użytkownika</Typography>
+                    </Grid>
+                    <Grid item sm={6}>
+                      <Typography color="primary" type="headline" gutterBottom>{data.username}</Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container sm={12} gutterBottom className="user-field">
+                    <Grid item sm={6}>
+                      <Typography type="headline" gutterBottom>Ukończone cele</Typography>
+                    </Grid>
+                    <Grid item sm={6}>
+                      <Typography color="primary" type="headline" gutterBottom>{data.finished_goals}</Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container sm={12} gutterBottom className="user-field">
+                    <Grid item sm={6}>
+                      <Typography type="headline" gutterBottom>Suma wpłat</Typography>
+                    </Grid>
+                    <Grid item sm={6}>
+                      <Typography color="primary" type="headline" gutterBottom>{data.total_amount}</Typography>
+                    </Grid>
+                  </Grid>
+                  <Grid container sm={12} gutterBottom className="user-field">
+                    <Grid item sm={6}>
+                      <Typography type="headline" gutterBottom>Liczba przelewów</Typography>
+                    </Grid>
+                    <Grid item sm={6}>
+                      <Typography color="primary" type="headline" gutterBottom>{data.total_payments}</Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item sm={4}>
+                <Grid container alignItems="center" justify="center">
+                  <Grid item>
+                    <AccountCircleIcon style={{width: '250px', height: '250px', fill: 'rgba(0, 0, 0, 0.54)'}}/>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid container alignItems="center" justify="center" style={{marginTop: '40px'}}>
               <Grid item>
                 <Button component={Link}
                         to={`/dashboard/users/${data.id}/send`}

@@ -35,6 +35,15 @@ export class UsersList extends React.Component {
       },
       last_name: {
         label: 'Nazwisko'
+      },
+      finished_goals: {
+        label: 'Ukończone cele'
+      },
+      total_amount: {
+        label: 'Suma wpłat'
+      },
+      total_payments: {
+        label: 'Liczba przelewów'
       }
     };
 

@@ -89,7 +89,10 @@ class ReactImageUploadComponent extends React.PureComponent {
    */
   renderLabel() {
     if (this.props.withLabel) {
-      return <p className={this.props.labelClass} style={this.props.labelStyles}>{this.props.label}</p>
+      return <p className={this.props.labelClass} style={this.props.labelStyles}>
+        {this.props.label}<br />
+        Wspierane formaty: jpg, gif, png oraz gif;
+        </p>
     }
   }
 
@@ -197,10 +200,12 @@ ReactImageUploadComponent.defaultProps = {
   accept: "accept=image/*",
   name: "",
   withIcon: true,
-  buttonText: "Choose images",
+  buttonText: "Wybierz plik...",
   withLabel: true,
-  label: "Max file size: 20mb, accepted: jpg|gif|png|gif",
-  labelStyles: {},
+  label: "Maksymalny rozmiar pliku to 20MB.",
+  labelStyles: {
+    textAlign: 'center'
+  },
   labelClass: "",
   imgExtension: ['.jpg', '.gif', '.png', '.gif'],
   maxFileSize: 20971520,
