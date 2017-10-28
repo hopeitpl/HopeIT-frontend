@@ -68,7 +68,11 @@ export class AuthenticatedLayout extends React.Component {
         <Drawer
           open={open}
           onRequestClose={this.handleDrawerClose}>
-          <div className={classes.list}>
+          <div className={classes.list}
+               tabIndex={0}
+               role="button"
+               onClick={this.handleDrawerClose}
+               onKeyDown={this.handleDrawerClose}>
             <div className={classes.drawerHeader}>
               <Typography type="title" className={classes.flex}>Menu</Typography>
             </div>
