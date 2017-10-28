@@ -1,4 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
+import ParserRoute from 'route-parser';
 import Api from 'api';
 
 const status = ['REQUEST', 'SUCCESS', 'FAILURE'];
@@ -11,9 +12,10 @@ export const createAction = (type, config = {}) => {
   const action = status.reduce((prev, s) => {
     let res = {};
     let a = `${type}_${s}`;
-    let subAction = payload => ({
+    let subAction = (payload, options) => ({
       type: a,
-      payload: payload
+      payload,
+      options
     });
 
     res[s] = a;
@@ -28,10 +30,13 @@ export const createAction = (type, config = {}) => {
 };
 
 
-export const createSaga = (action, url, options) => {
+export const createSaga = (action, options) => {
   function* apiSaga(a) {
     try {
-      const response = yield call(Api[action.config.method.toLowerCase()], url, a.payload, options);
+      const url = new ParserRoute(action.config.url);
+      const response = yield call(
+        Api[action.config.method.toLowerCase()], url.reverse(a.options.urlParams), a.payload, options
+      );
       yield put(action.success({ data: response.data }));
     } catch (error) {
       yield put(action.failure({ error: error.toString() }));

@@ -33,7 +33,7 @@ export class UsersList extends React.Component {
 
     return data ? (
       <div>
-        <Typography type="display3">Użytkownicy</Typography>
+        <Typography type="display3" gutterBottom>Użytkownicy</Typography>
         <Paper>
           <Table>
             <TableHead>
@@ -48,7 +48,7 @@ export class UsersList extends React.Component {
             <TableBody>
               {data.users.map((user, i) => {
                 return (
-                  <TableRow key={i} hover onClick={this.handleUserClick()}>
+                  <TableRow key={i} hover onClick={this.handleUserClick(user.id)}>
                     {Object.keys(labels).map((key, j) => {
                       return (
                         <TableCell key={j} {...(labels[key].options || {})}>

@@ -33,6 +33,7 @@
     "redux-form": "^7.1.2",
     "redux-form-saga": "^0.1.2",
     "redux-saga": "^0.16.0",
+    "route-parser": "^0.0.5",
     "sass-loader": "^6.0.6",
     "universal-cookie": "^2.1.0"
   },
