@@ -9,9 +9,9 @@ export const LoginForm = ({ handleSubmit, error }) => {
   return (
     <form onSubmit={handleSubmit(login)}>
       <Paper className="panel">
-        <Typography type="display1">Login</Typography>
+        <Typography type="display1" gutterBottom>Zaloguj</Typography>
         <FormControl fullWidth margin="normal">
-          <Field name="email" component={TextField} label="Email" error={!!error} />
+          <Field name="username" component={TextField} label="Nazwa użytkownika" error={!!error} />
         </FormControl>
         <FormControl fullWidth margin="normal">
           <Field name="password" component={TextField} type="password" error={!!error} label="Hasło" />

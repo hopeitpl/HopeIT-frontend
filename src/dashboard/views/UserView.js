@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchUser } from '../redux';
-import { Typography, Paper } from 'material-ui';
+import AccountCircleIcon from 'material-ui-icons/AccountCircle';
+import { Typography, Paper, Grid, Button } from 'material-ui';
+import { grey } from 'material-ui/colors';
+import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
+
 
 export class UserView extends React.Component {
   componentWillMount() {
@@ -21,12 +26,29 @@ export class UserView extends React.Component {
     const { data } = this.props;
 
     return data ? (
-      <div>
-        <Typography type="display3" gutterBottom>Użytkownik - {data.username}</Typography>
-        <Paper>
-          Tu będzie coś o userze
+      <AuthenticatedLayout title="Użytkownik">
+        <Paper className="panel">
+          <Typography type="display3" gutterBottom style={{paddingLeft: '16px'}}>{data.username}</Typography>
+          <Grid container alignItems="center">
+            <Grid item>
+              <AccountCircleIcon style={{width: '150px', height: '150px', fill: grey[500] }}/>
+            </Grid>
+            <Grid item>
+              <Typography type="display2" gutterBottom>Imie Nazwisko</Typography>
+            </Grid>
+          </Grid>
+          <Grid container alignItems="center" justify="flex-end">
+            <Grid item>
+              <Button component={Link}
+                      to={`/dashboard/users/${data.id}/send`}
+                      raised
+                      color="primary">
+                Wyślij wiadomość
+              </Button>
+            </Grid>
+          </Grid>
         </Paper>
-      </div>
+      </AuthenticatedLayout>
     ) : null;
   }
 }

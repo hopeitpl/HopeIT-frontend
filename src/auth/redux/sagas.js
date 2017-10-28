@@ -13,14 +13,14 @@ export function* logoutSaga() {
 }
 
 function* handleLoginSaga(action) {
-  const { email, password, redirect = true } = action.payload;
+  const { username, password, redirect = true } = action.payload;
   let token;
 
   try {
     if (action.payload.token) {
       token = action.payload.token;
     } else {
-      token = btoa(`${email}:${password}`);
+      token = btoa(`${username}:${password}`);
       yield call(Api.setCookie, 'token', token, {path: '/'});
     }
     yield call(Api.get, '/_ping');

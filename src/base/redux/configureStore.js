@@ -13,7 +13,7 @@ import { loginSaga, logoutSaga } from 'auth/redux/sagas';
 
 // Reducers
 import loginReducer from 'auth/redux/reducers';
-import { usersReducer, usersSaga, userReducer, userSaga } from 'dashboard/redux';
+import { usersReducer, usersSaga, userReducer, userSaga, sendMessageReducer, sendMessageSaga } from 'dashboard/redux';
 import { httpErrorsReducer } from 'httpErrors/redux';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -35,6 +35,7 @@ const rootSaga = function* () {
     logoutSaga(),
     usersSaga(),
     userSaga(),
+    sendMessageSaga(),
     initialSaga()
   ]);
 };
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   form: formReducer,
   httpErrors: httpErrorsReducer,
+  sendMessage: sendMessageReducer,
   router: routerReducer
 });
 

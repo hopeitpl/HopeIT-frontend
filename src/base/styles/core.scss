@@ -15,7 +15,7 @@ $red: #F44336;
 }
 
 .panel {
-  padding: 2 * $spacer;
+  padding: 30px;
 }
 
 .navbar {
@@ -29,6 +29,19 @@ $red: #F44336;
     &:focus,
     &:active {
       text-decoration: none;
+      color: inherit;
     }
+  }
+}
+
+.full-link {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+
+  &:focus,
+  &:active {
+    text-decoration: none;
+    color: inherit;
   }
 }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { fetchUsers } from '../redux';
 import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper } from 'material-ui';
+import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 
 export class UsersList extends React.Component {
   componentWillMount() {
@@ -32,7 +33,7 @@ export class UsersList extends React.Component {
     };
 
     return data ? (
-      <div>
+      <AuthenticatedLayout title="Użytkownicy">
         <Typography type="display3" gutterBottom>Użytkownicy</Typography>
         <Paper>
           <Table>
@@ -62,7 +63,7 @@ export class UsersList extends React.Component {
             </TableBody>
           </Table>
         </Paper>
-      </div>
+      </AuthenticatedLayout>
     ) : null;
   }
 }
