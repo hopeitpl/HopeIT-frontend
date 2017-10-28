@@ -2,6 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import ParserRoute from 'route-parser';
 import Api from 'api';
 import { PROMISE } from 'redux-form-saga';
+import { httpError } from 'httpErrors/redux';
 
 const status = ['REQUEST', 'SUCCESS', 'FAILURE'];
 
@@ -52,6 +53,10 @@ export const createSaga = (action, options) => {
       );
       yield put(action.success({ data: response.data }));
     } catch (error) {
+      if(error.status && error.status === 404) {
+        yield put(httpError(error.status));
+      }
+
       yield put(action.failure({ error: error.toString() }));
     }
   }

@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPayments } from '../redux';
+import { fetchUserMessages } from '../redux';
 import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper } from 'material-ui';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 
-export class PaymentsList extends React.Component {
+export class UserMessagesListView extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchPayments.request());
+    this.props.dispatch(fetchUserMessages.request(null, {urlParams: {id: this.props.match.params.id}}));
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { dispatch, match: { params }} = newProps;
+    if(this.props.match.params.id !== params.id) {
+      dispatch(fetchUserMessages.request(null, {urlParams: {id: params.id}}));
+    }
   }
 
   render () {
@@ -20,29 +27,17 @@ export class PaymentsList extends React.Component {
           numeric: true
         }
       },
-      user_id: {
-        label: 'Id użytkownika'
+      body: {
+        label: 'Treść'
       },
-      operation_amount: {
-        label: 'Kwota'
-      },
-      operation_datetime: {
-        label: 'Data płatności',
-        transform: (value) => {
-          return new Date(value).toLocaleDateString('pl-PL', {
-            hour: '2-digit',
-            minute: '2-digit'
-          });
-        }
-      },
-      goal_id: {
-        label: 'Cel'
+      picture: {
+        label: 'Obrazek'
       }
     };
 
     return data ? (
-      <AuthenticatedLayout title="Lista płatności">
-        <Typography type="display3" gutterBottom>Lista płatności</Typography>
+      <AuthenticatedLayout title="Wiadomości do użytkownika">
+        <Typography type="display3" gutterBottom>Wiadomości do użytkownika</Typography>
         <Paper>
           <Table>
             <TableHead>
@@ -55,15 +50,15 @@ export class PaymentsList extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.payments.map((user, i) => {
+              {data.messages.map((user, i) => {
                 return (
                   <TableRow key={i}>
                     {Object.keys(labels).map((key, j) => {
                       return (
                         <TableCell key={j} {...(labels[key].options || {})}>
-                          {key === 'operation_amount' ?
-                            `${user[key]} ${user.operation_currency}` :
-                            labels[key].transform ? labels[key].transform(user[key]) : user[key]
+                          {key === 'picture' ?
+                            <img src={user[key]} /> :
+                            user[key]
                           }
                         </TableCell>
                       );
@@ -79,9 +74,10 @@ export class PaymentsList extends React.Component {
   }
 }
 
-PaymentsList.propTypes = {
+UserMessagesListView.propTypes = {
   data: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  match: PropTypes.object
 };
 
-export default connect(({ payments }) => (payments))(PaymentsList);
+export default connect(({ userMessages }) => (userMessages))(UserMessagesListView);

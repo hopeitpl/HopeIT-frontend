@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPayments } from '../redux';
+import { fetchUserPayments } from '../redux';
 import { Table, TableHead, TableBody, TableRow, TableCell, Typography, Paper } from 'material-ui';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 
-export class PaymentsList extends React.Component {
+export class UserPaymentsListView extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchPayments.request());
+    this.props.dispatch(fetchUserPayments.request(null, {urlParams: {id: this.props.match.params.id}}));
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { dispatch, match: { params }} = newProps;
+    if(this.props.match.params.id !== params.id) {
+      dispatch(fetchUserPayments.request(null, {urlParams: {id: params.id}}));
+    }
   }
 
   render () {
@@ -19,9 +26,6 @@ export class PaymentsList extends React.Component {
         options: {
           numeric: true
         }
-      },
-      user_id: {
-        label: 'Id użytkownika'
       },
       operation_amount: {
         label: 'Kwota'
@@ -41,8 +45,8 @@ export class PaymentsList extends React.Component {
     };
 
     return data ? (
-      <AuthenticatedLayout title="Lista płatności">
-        <Typography type="display3" gutterBottom>Lista płatności</Typography>
+      <AuthenticatedLayout title="Płatności użytkownika">
+        <Typography type="display3" gutterBottom>Płatności użytkownika</Typography>
         <Paper>
           <Table>
             <TableHead>
@@ -79,9 +83,10 @@ export class PaymentsList extends React.Component {
   }
 }
 
-PaymentsList.propTypes = {
+UserPaymentsListView.propTypes = {
   data: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  match: PropTypes.object
 };
 
-export default connect(({ payments }) => (payments))(PaymentsList);
+export default connect(({ userPayments }) => (userPayments))(UserPaymentsListView);

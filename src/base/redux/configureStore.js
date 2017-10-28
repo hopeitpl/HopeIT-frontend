@@ -13,8 +13,15 @@ import { loginSaga, logoutSaga } from 'auth/redux/sagas';
 
 // Reducers
 import loginReducer from 'auth/redux/reducers';
-import { usersReducer, usersSaga, userReducer, userSaga, sendMessageReducer, sendMessageSaga,
-  paymentsReducer, paymentsSaga } from 'dashboard/redux';
+import {
+  usersReducer, usersSaga,
+  userReducer, userSaga,
+  sendMessageReducer, sendMessageSaga,
+  paymentsReducer, paymentsSaga,
+  messagesReducer, messagesSaga,
+  userPaymentsReducer, userPaymentsSaga,
+  userMessagesReducer, userMessagesSaga
+} from 'dashboard/redux';
 import { httpErrorsReducer } from 'httpErrors/redux';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -38,6 +45,9 @@ const rootSaga = function* () {
     userSaga(),
     sendMessageSaga(),
     paymentsSaga(),
+    messagesSaga(),
+    userPaymentsSaga(),
+    userMessagesSaga(),
     initialSaga()
   ]);
 };
@@ -48,8 +58,11 @@ const rootReducer = combineReducers({
   login: loginReducer,
   form: formReducer,
   payments: paymentsReducer,
+  userPayments: userPaymentsReducer,
+  userMessages: userMessagesReducer,
   httpErrors: httpErrorsReducer,
   sendMessage: sendMessageReducer,
+  messages: messagesReducer,
   router: routerReducer
 });
 

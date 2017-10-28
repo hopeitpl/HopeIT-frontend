@@ -46,6 +46,22 @@ export class UserView extends React.Component {
                 Wyślij wiadomość
               </Button>
             </Grid>
+            <Grid item>
+              <Button component={Link}
+                      to={`/dashboard/users/${data.id}/messages`}
+                      raised
+                      color="primary">
+                Wysłane wiadomości
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button component={Link}
+                      to={`/dashboard/users/${data.id}/payments`}
+                      raised
+                      color="primary">
+                Lista wpłat
+              </Button>
+            </Grid>
           </Grid>
         </Paper>
       </AuthenticatedLayout>

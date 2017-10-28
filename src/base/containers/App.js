@@ -8,7 +8,10 @@ import SendMessageView from 'dashboard/views/SendMessageView';
 import RouteNotFound from 'httpErrors/components/RouteNotFound';
 import HandleError from 'httpErrors/containers/HandleError';
 import { MuiThemeProvider, createMuiTheme, red, indigo } from 'material-ui/styles';
-import PaymentsList from 'dashboard/views/PaymentsListView';
+import PaymentsListView from 'dashboard/views/PaymentsListView';
+import MessagesListView from 'dashboard/views/MessagesListView';
+import UserPaymentsListView from 'dashboard/views/UserPaymentsListView';
+import UserMessagesListView from 'dashboard/views/UserMessagesListView';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,10 +28,13 @@ export const App = () => {
           <Route exact path="/login" component={LoginView} />
           <Route path="/dashboard">
             <Switch>
+              <Route exact path="/dashboard/users/:id/payments" component={UserPaymentsListView} />
+              <Route exact path="/dashboard/users/:id/messages" component={UserMessagesListView} />
               <Route exact path="/dashboard/users/:id/send" component={SendMessageView} />
               <Route exact path="/dashboard/users/:id" component={UserView} />
               <Route exact path="/dashboard/users" component={UsersList} />
-              <Route exact path="/dashboard/payments" component={PaymentsList} />
+              <Route exact path="/dashboard/payments" component={PaymentsListView} />
+              <Route exact path="/dashboard/messages" component={MessagesListView} />
               <Route exact path="/dashboard" component={DashboardView} />
               <RouteNotFound />
             </Switch>
