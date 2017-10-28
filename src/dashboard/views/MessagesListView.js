@@ -22,7 +22,7 @@ export class MessagesListView extends React.Component {
         }
       },
       body: {
-        label: 'Nazwa użytkownika'
+        label: 'Treść'
       },
       picture: {
         label: 'Obrazek'
