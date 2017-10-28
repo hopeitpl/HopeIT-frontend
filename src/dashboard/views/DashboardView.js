@@ -1,16 +1,6 @@
 import React from 'react';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
-import Card from "material-ui/Card/Card";
-import CardContent from "material-ui/es/Card/CardContent";
-import Typography from "material-ui/es/Typography/Typography";
-
-// export const DashboardView = () => {
-//   return (
-//     <AuthenticatedLayout title="Pulpit">
-//       Dashboard
-//     </AuthenticatedLayout>
-//   );
-// };
+import { Card, CardContent, Typography } from 'material-ui';
 
 
 class DashboardView extends React.Component {
@@ -24,7 +14,6 @@ class DashboardView extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return <AuthenticatedLayout title="Pulpit">
       <div>
         <Card>
@@ -68,7 +57,7 @@ class DashboardView extends React.Component {
           </CardContent>
         </Card>
       </div>
-    </AuthenticatedLayout>
+    </AuthenticatedLayout>;
   }
 }
 
