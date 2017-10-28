@@ -50,7 +50,9 @@ export class UserMessagesListView extends React.Component {
       <AuthenticatedLayout title="Archiwum wiadomości">
         {userMessages.data ?
           <div>
-            <Typography type="display2" gutterBottom>Archiwum wiadomości użytkownika {user.data.username}</Typography>
+            <Typography type="display2" gutterBottom>
+              Archiwum wiadomości użytkownika {user.data && user.data.username}
+            </Typography>
             <Paper>
               <Table>
                 <TableHead>

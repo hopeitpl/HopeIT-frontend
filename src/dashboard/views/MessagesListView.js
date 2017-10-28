@@ -21,6 +21,9 @@ export class MessagesListView extends React.Component {
           numeric: true
         }
       },
+      user: {
+        label: 'Użytkownik'
+      },
       body: {
         label: 'Treść'
       },
