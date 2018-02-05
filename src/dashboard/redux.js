@@ -24,6 +24,10 @@ export const fetchUser = createAction('FETCH_USER', {url: '/admin/users/:id'});
 export const userSaga = createSaga(fetchUser);
 export const userReducer = createReducer(fetchUser);
 
+export const fetchDashboard = createAction('FETCH_DASHBOARD', {url: '/admin/dashboard'});
+export const dashboardSaga = createSaga(fetchDashboard);
+export const dashboardReducer = createReducer(fetchDashboard);
+
 export const sendMessage = createAction('SEND_MESSAGE', {
   method: 'POST',
   url: '/admin/messages/user/:id'

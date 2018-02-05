@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from 'material-ui';
 
 export const FullLayout = ({ children }) => {
   return (
-    <Grid container className="base-layout" justify="center" alignItems="center">
-      <Grid item>
+    <div className="base-layout">
+      <div>
         {children}
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

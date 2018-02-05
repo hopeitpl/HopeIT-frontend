@@ -49,39 +49,35 @@ export class UsersList extends React.Component {
 
     return (
       <AuthenticatedLayout title="Użytkownicy">
-        {data ?
-          <div>
-            <Typography type="display3" gutterBottom>Użytkownicy</Typography>
-            <Paper>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {Object.values(labels).map((l, i) => {
+        <Typography type="display3" gutterBottom>Użytkownicy</Typography>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {Object.values(labels).map((l, i) => {
+                  return (
+                    <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data && data.users.map((user, i) => {
+                return (
+                  <TableRow key={i} hover onClick={this.handleUserClick(user.id)}>
+                    {Object.keys(labels).map((key, j) => {
                       return (
-                        <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                        <TableCell key={j} {...(labels[key].options || {})}>
+                          {user[key]}
+                        </TableCell>
                       );
                     })}
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.users.map((user, i) => {
-                    return (
-                      <TableRow key={i} hover onClick={this.handleUserClick(user.id)}>
-                        {Object.keys(labels).map((key, j) => {
-                          return (
-                            <TableCell key={j} {...(labels[key].options || {})}>
-                              {user[key]}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Paper>
-          </div> : null
-        }
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
       </AuthenticatedLayout>
     );
   }

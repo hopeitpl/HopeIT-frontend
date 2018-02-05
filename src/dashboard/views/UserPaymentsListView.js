@@ -46,42 +46,38 @@ export class UserPaymentsListView extends React.Component {
 
     return (
       <AuthenticatedLayout title="Płatności użytkownika">
-        {data ?
-          <div>
-            <Typography type="display3" gutterBottom>Płatności użytkownika</Typography>
-            <Paper>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {Object.values(labels).map((l, i) => {
+        <Typography type="display3" gutterBottom>Płatności użytkownika</Typography>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {Object.values(labels).map((l, i) => {
+                  return (
+                    <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data && data.payments.map((user, i) => {
+                return (
+                  <TableRow key={i}>
+                    {Object.keys(labels).map((key, j) => {
                       return (
-                        <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                        <TableCell key={j} {...(labels[key].options || {})}>
+                          {key === 'operation_amount' ?
+                            `${user[key]} ${user.operation_currency}` :
+                            labels[key].transform ? labels[key].transform(user[key]) : user[key]
+                          }
+                        </TableCell>
                       );
                     })}
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.payments.map((user, i) => {
-                    return (
-                      <TableRow key={i}>
-                        {Object.keys(labels).map((key, j) => {
-                          return (
-                            <TableCell key={j} {...(labels[key].options || {})}>
-                              {key === 'operation_amount' ?
-                                `${user[key]} ${user.operation_currency}` :
-                                labels[key].transform ? labels[key].transform(user[key]) : user[key]
-                              }
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Paper>
-          </div> : null
-        }
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
       </AuthenticatedLayout>
     );
   }

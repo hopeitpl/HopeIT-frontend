@@ -1,21 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import AuthenticatedLayout from 'auth/layouts/AuthenticatedLayout';
 import { Link } from 'react-router-dom';
 import { Card, Grid, CardContent, Typography, Button } from 'material-ui';
 import { pink, indigo } from 'material-ui/colors';
+import { fetchDashboard } from '../redux';
 
 
 class DashboardView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
-    fetch(__API_URL__ + '/admin/dashboard').then(result => result.json()).then(json => this.setState(json));
+    this.props.dispatch(fetchDashboard.request());
   }
 
   render() {
+    const { data } = this.props;
+
     return <AuthenticatedLayout title="Pulpit">
       <Grid container>
         <Grid item xs={12} md={8}>
@@ -26,7 +26,7 @@ class DashboardView extends React.Component {
                   Zebrane środki
                 </Typography>
                 <Typography type="headline" component="h1">
-                  {this.state.total_balance} zł
+                  {data && data.total_balance} zł
                 </Typography>
               </CardContent>
             </Card>
@@ -36,7 +36,7 @@ class DashboardView extends React.Component {
                   Ilość wpłat
                 </Typography>
                 <Typography type="headline" component="h1">
-                  {this.state.total_payments}
+                  {data && data.total_payments}
                 </Typography>
               </CardContent>
             </Card>
@@ -46,7 +46,7 @@ class DashboardView extends React.Component {
                   Zarejestrowani użytkownicy
                 </Typography>
                 <Typography type="headline" component="h1">
-                  {this.state.total_users}
+                  {data && data.total_users}
                 </Typography>
               </CardContent>
             </Card>
@@ -56,7 +56,7 @@ class DashboardView extends React.Component {
                   Wspólny cel (suma)
                 </Typography>
                 <Typography type="headline" component="h1">
-                  {this.state.total_goal} zł
+                  {data && data.total_goal} zł
                 </Typography>
               </CardContent>
             </Card>
@@ -93,4 +93,9 @@ class DashboardView extends React.Component {
   }
 }
 
-export default DashboardView;
+DashboardView.propTypes = {
+  data: PropTypes.object,
+  dispatch: PropTypes.func
+};
+
+export default connect(({ dashboard }) => (dashboard))(DashboardView);

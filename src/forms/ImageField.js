@@ -1,25 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageUploader from './ImageUploader';
+import Dropzone from 'react-dropzone';
+import { Typography } from 'material-ui';
 
-const onImageUpload = (onChange, picture) => {
-  const reader = new FileReader();
+import './image.scss';
 
-  reader.addEventListener('load', () => {
-    onChange(reader.result.split(',')[1]);
-  });
+export class ImageField extends React.Component {
+  constructor(props) {
+    super(props);
 
-  reader.readAsDataURL(picture[0]);
-};
+    this.state = {
+      image: null
+    };
+  }
 
-export const ImageField = ({ input }) => {
-  return (
-    <div>
-      <ImageUploader onChange={onImageUpload.bind(null, input.onChange)} />
-      <input type="hidden" name={input.name} value={input.value} />
-    </div>
-  );
-};
+  onImageUpload = (picture) => {
+    const { input } = this.props;
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      input.onChange(reader.result.split(',')[1]);
+    });
+
+    reader.readAsDataURL(picture[0]);
+
+    this.setState({
+      image: picture[0]
+    });
+  }
+
+  render () {
+    const { input } = this.props;
+    const { image } = this.state;
+    return (
+      <div>
+        <Dropzone className="image-dropzone-container" onDrop={this.onImageUpload}>
+          <div className="image-dropzone">
+            {!image ?
+              <Typography type="display1">Dodaj zdjęcie</Typography> :
+              <img src={image.preview} />
+            }
+          </div>
+        </Dropzone>
+        <input type="hidden" name={input.name} value={input.value} />
+      </div>
+    );
+  }
+}
 
 ImageField.propTypes = {
   input: PropTypes.object
