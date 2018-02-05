@@ -48,44 +48,40 @@ export class UserMessagesListView extends React.Component {
 
     return (
       <AuthenticatedLayout title="Archiwum wiadomości">
-        {userMessages.data ?
-          <div>
-            <Typography type="display2" gutterBottom>
-              Archiwum wiadomości użytkownika {user.data && user.data.username}
-            </Typography>
-            <Paper>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {Object.values(labels).map((l, i) => {
+        <Typography type="display2" gutterBottom>
+          Archiwum wiadomości użytkownika {user.data && user.data.username}
+        </Typography>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {Object.values(labels).map((l, i) => {
+                  return (
+                    <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                  );
+                })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {userMessages.data && userMessages.data.messages.map((user, i) => {
+                return (
+                  <TableRow key={i}>
+                    {Object.keys(labels).map((key, j) => {
                       return (
-                        <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
+                        <TableCell key={j} {...(labels[key].options || {})}>
+                          {key === 'picture' ?
+                            <img src={`data:image;base64,${user[key]}`} /> :
+                            labels[key].transform ? labels[key].transform(user[key]) : user[key]
+                          }
+                        </TableCell>
                       );
                     })}
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {userMessages.data.messages.map((user, i) => {
-                    return (
-                      <TableRow key={i}>
-                        {Object.keys(labels).map((key, j) => {
-                          return (
-                            <TableCell key={j} {...(labels[key].options || {})}>
-                              {key === 'picture' ?
-                                <img src={`data:image;base64,${user[key]}`} /> :
-                                labels[key].transform ? labels[key].transform(user[key]) : user[key]
-                              }
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Paper>
-          </div> : null
-        }
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
       </AuthenticatedLayout>
     );
   }

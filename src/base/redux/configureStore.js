@@ -21,7 +21,8 @@ import {
   messagesReducer, messagesSaga,
   userPaymentsReducer, userPaymentsSaga,
   userMessagesReducer, userMessagesSaga,
-  sendMultiMessageReducer, sendMultiMessageSaga
+  sendMultiMessageReducer, sendMultiMessageSaga,
+  dashboardReducer, dashboardSaga
 } from 'dashboard/redux';
 import { httpErrorsReducer } from 'httpErrors/redux';
 
@@ -47,6 +48,7 @@ const rootSaga = function* () {
     sendMessageSaga(),
     paymentsSaga(),
     messagesSaga(),
+    dashboardSaga(),
     userPaymentsSaga(),
     userMessagesSaga(),
     sendMultiMessageSaga(),
@@ -66,6 +68,7 @@ const rootReducer = combineReducers({
   sendMessage: sendMessageReducer,
   sendMultiMessage: sendMultiMessageReducer,
   messages: messagesReducer,
+  dashboard: dashboardReducer,
   router: routerReducer
 });
 

@@ -14,6 +14,10 @@ export default class Root extends React.Component {
     store: PropTypes.object.isRequired
   }
 
+  componentDidCatch(error) {
+    console.error(error);
+  }
+
   render() {
     return (
       <Provider store={this.props.store}>

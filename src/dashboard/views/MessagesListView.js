@@ -34,54 +34,52 @@ export class MessagesListView extends React.Component {
 
     return (
       <AuthenticatedLayout title="Wiadomości">
-        {data ?
-          <div>
-            <Grid container justify="space-between" alignItems="center">
-              <Grid item>
-                <Typography type="display3" gutterBottom>Wiadomości</Typography>
-              </Grid>
-              <Grid item>
-                <Button raised
-                        color="primary"
-                        component={Link}
-                        to="/dashboard/messages/send">
-                    Wyślij do wielu
-                </Button>
-              </Grid>
+        <div>
+          <Grid container justify="space-between" alignItems="center">
+            <Grid item>
+              <Typography type="display3" gutterBottom>Wiadomości</Typography>
             </Grid>
-            <Paper>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {Object.values(labels).map((l, i) => {
-                      return (
-                        <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
-                      );
-                    })}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.messages.map((user, i) => {
+            <Grid item>
+              <Button raised
+                      color="primary"
+                      component={Link}
+                      to="/dashboard/messages/send">
+                  Wyślij do wielu
+              </Button>
+            </Grid>
+          </Grid>
+          <Paper>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {Object.values(labels).map((l, i) => {
                     return (
-                      <TableRow key={i}>
-                        {Object.keys(labels).map((key, j) => {
-                          return (
-                            <TableCell key={j} {...(labels[key].options || {})}>
-                              {key === 'picture' ?
-                                <img src={`data:image;base64,${user[key]}`} /> :
-                                user[key]
-                              }
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
+                      <TableCell key={i} {...(l.options || {})}>{l.label}</TableCell>
                     );
                   })}
-                </TableBody>
-              </Table>
-            </Paper>
-          </div> : null
-        }
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data && data.messages.map((user, i) => {
+                  return (
+                    <TableRow key={i}>
+                      {Object.keys(labels).map((key, j) => {
+                        return (
+                          <TableCell key={j} {...(labels[key].options || {})}>
+                            {key === 'picture' ?
+                              <img src={`data:image;base64,${user[key]}`} /> :
+                              user[key]
+                            }
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Paper>
+        </div>
       </AuthenticatedLayout>
     );
   }

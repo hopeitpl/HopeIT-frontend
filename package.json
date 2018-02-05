@@ -1,10 +1,10 @@
 {
-  "name": "HopeIT-frontend",
+  "name": "hopeit-frontend",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:Bydlaki/HopeIT-frontend.git",
   "author": "Bydlaki",
-  "license": "MIT",
+  "license": "GPLv2",
   "scripts": {
     "lint": "eslint src/",
     "lint:fix": "npm run lint -- --fix",
@@ -25,7 +25,8 @@
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-flip-move": "^2.9.17",
+    "react-dropzone": "^4.2.7",
+    "react-flip-move": "^3.0.1",
     "react-helmet": "^5.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
